@@ -6,15 +6,16 @@ tar = tarfile.open("sample.tar","w")
 tar.add("C:\\Users\\135670\\Vijay\\poc-code\\amvijay.github.io")
 tar.close
 
-CHUNK_SIZE = 500000
+# 500 MB
+CHUNK_SIZE_BYTES = 500 * ((1 * 1024) * 1024)
 file_number = 1
 with open("sample.tar", mode="rb") as f:
-    chunk = f.read(CHUNK_SIZE)
+    chunk = f.read(CHUNK_SIZE_BYTES)
     while chunk:
         with open("sample.tar" + str(file_number), mode="wb") as chunk_file:
             chunk_file.write(chunk)
         file_number += 1
-        chunk = f.read(CHUNK_SIZE)
+        chunk = f.read(CHUNK_SIZE_BYTES)
 
 file_number = 1
 with open("sample-merged.tar",mode="ab") as merged_file:
